@@ -1,8 +1,10 @@
 title: lsy
 speaker: lsy
 url: https://github.com/ksky521/nodePPT
-transition: cards
+transition: slide
+theme: dark
 files: /js/demo.js,/css/demo.css
+date: 2016/07/08
 
 [slide]
 
