@@ -26,16 +26,12 @@ date: 2016/07/14
 
 [slide]
 
+# 封面样式2 {:&.flexbox.vleft}
 ## 进程、进程组、会话 
-
 进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端
-
 ### 会话
-
 #### 会话首进程
-
 创建会话的进程，该进程是会话的领导进程，其PID＝SID。
-
 #### 会话的构成
 一个或者多个进程组的集合。包括一个前台进程组，多个后台进程组。当有控制终端输入输出时，会传递给该会话的前台进程组。
 ### 进程组
@@ -55,7 +51,8 @@ PID和PGID相等的进程。
 
 [slide]
 
-## 什么时信号
+# 封面样式2 {:&.flexbox.vleft}
+## 什么是信号
 信号是很短的消息，可以发送给一个进程或者一组进程。
 ## 信号的目的
 1. 让进程知道已经发生了一个特定的事件
@@ -69,18 +66,21 @@ PID和PGID相等的进程。
 
 [slide]
 
+# 封面样式2 {:&.flexbox.vleft}
 ## 信号处理相关的数据结构图
 
 ![信号处理相关的数据结构图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-struct.jpg)
 
 [slide]
 
+# 封面样式2 {:&.flexbox.vleft}
 ## 信号捕获流程图
 
 ![信号处理流程图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-proccess.jpg)
 
 [slide]
 
+# 封面样式2 {:&.flexbox.vleft}
 ## 现象分析
 一旦ssh关闭，程序就不再运行了。
 ### 解释
@@ -90,6 +90,7 @@ If the process receiving SIGHUP is a Unix shell, then as part of job control it 
 
 [slide]
 
+# 封面样式2 {:&.flexbox.vleft}
 ## 解决措施
 1. ctrl-c
 原因：ctrl-c 后，会触发sigint信号，而sigint只会发给前台进程组，不会影响后台进程组的正常运行。
