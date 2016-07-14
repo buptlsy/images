@@ -1,7 +1,7 @@
 title: lsy
 speaker: lsy
 url: https://github.com/ksky521/nodePPT
-transition: slide
+transition: glue
 theme: dark
 files: /js/demo.js,/css/demo.css
 date: 2016/07/14
@@ -27,10 +27,15 @@ date: 2016/07/14
 [slide]
 
 ## 进程、进程组、会话 
+
 进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端
+
 ### 会话
+
 #### 会话首进程
+
 创建会话的进程，该进程是会话的领导进程，其PID＝SID。
+
 #### 会话的构成
 一个或者多个进程组的集合。包括一个前台进程组，多个后台进程组。当有控制终端输入输出时，会传递给该会话的前台进程组。
 ### 进程组
