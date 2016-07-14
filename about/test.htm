@@ -2,7 +2,7 @@
     Powered By nodePPT - This is probably the best web presentation tool so far!
     version: 1.4.2
     site: https://github.com/ksky521/nodePPT
-    date: 2016/07/08
+    date: 2016/07/14
 -->
 <!doctype html>
 <html>
@@ -22,37 +22,46 @@
     <slides id="container">
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>lsy</h1>
-<h2>演讲者：lsy</h2>
+<h2>演讲者：刘善永</h2>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
-<h2>左对齐</h2>
+<h1>目录</h1>
+<h2>上线时出现的问题</h2>
+<h2>进程的介绍</h2>
+<h2>信号的介绍</h2>
+<h2>现象分析</h2>
+<h2>解决措施及原理</h2>
 
 </article></section></slide>
-<slide class="slide fill" style="background-image:url('./img/bg1.png')"><section class="slide-wrapper"><article>
-<h2>使用背景</h2>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>上线时出现的问题</h2>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><hgroup>
-<h2>使用.class/#id/自定义属性样式</h2>
-
-</hgroup><article>
-
-<pre><code class="javascript">alert(&#39;nodeppt&#39;);
-</code></pre>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h2> </h2>
+<h1>#</h1>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><hgroup>
-<h2>主页面样式</h2>
-<h3>----是上下分界线</h3>
-
-</hgroup><article>
-
-<p>nodeppt是基于nodejs写的支持 <strong>Markdown!</strong> 语法的网页PPT，当前版本：1.4.2</p>
-<p>Github：<a href="https://github.com/ksky521/nodePPT" target="_blank">https://github.com/ksky521/nodePPT</a></p>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>什么时信号</h2>
+<p>信号是很短的消息，可以发送给一个进程或者一组进程。</p>
+<h2>信号的目的</h2>
+<ol>
+<li>让进程知道已经发生了一个特定的事件</li>
+<li>强迫进程执行它自己代码中的信号处理程序<h2>信号的产生</h2>
+内核更新目标进程的数据结构以表示一个新信号已被发送<h2>信号的传递</h2>
+内核强迫目标进程通过以下方式对信号作出反应：或改变目标进程的执行状态，或开始执行信号处理函数，或者两者都是。<h2>挂起信号</h2>
+已经产生还没有传递的信号被称为挂起信号。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/redis-hash.png" alt="信号处理相关的数据结构图">
 
 </article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/redis-hash.png" alt="信号处理流程图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"></section></slide>
         
 
         <!-- <slide class="slide logoslide dark nobackground">
