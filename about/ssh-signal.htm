@@ -38,8 +38,9 @@
 <h2>上线时出现的问题</h2>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article>
-<h2><font size=6>进程、进程组、会话</font> {:&amp;.flexbox.vleft}</h2>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
+<h2><font size=6>进程、进程组、会话</font></h2>
 <font size=4>进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端</font>
 ### <font size=5>会话</font>
 <font size=4>
@@ -58,7 +59,8 @@
 <font size=4>该进程组中的进程能够向终端进行写，但是当试图读终端设备时，将会收到SIGTTIN信号，并停止。
 后台进程组可以同时存在多个。</font>
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>进程</h2>
 <h3>僵尸进程</h3>
 <p>一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或者waitpid获取子进程的状态信息，那么子进程的描述符仍然保存在系统中。</p>
@@ -66,8 +68,8 @@
 <p>一个父进程退出，而它的一个或多个子进程还在运行，那这些子进程就成为孤儿进程。孤儿进程将有init进程收养，并由init进程完成状态收集工作。</p>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>什么是信号</h2>
 <p>信号是很短的消息，可以发送给一个进程或者一组进程。</p>
 <h2>信号的目的</h2>
@@ -80,20 +82,20 @@
 </ol>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>信号处理相关的数据结构图</h2>
 <img src="https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-struct.jpg" alt="信号处理相关的数据结构图">
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>信号捕获流程图</h2>
 <img src="https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-proccess.jpg" alt="信号处理流程图">
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>现象分析</h2>
 <p>一旦ssh关闭，程序就不再运行了。</p>
 <h3>解释</h3>
@@ -102,8 +104,8 @@
 <p>If the process receiving SIGHUP is a Unix shell, then as part of job control it will often intercept the signal and ensure that all stopped processes are continued before sending the signal to child processes (more precisely, process groups, represented internally be the shell as a &quot;job&quot;), which by default terminates them.</p>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>封面样式2</h1>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>{:&amp;.flexbox.vleft}</h1>
 <h2>解决措施</h2>
 <ol>
 <li>ctrl-c

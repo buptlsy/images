@@ -26,7 +26,8 @@ date: 2016/07/14
 
 [slide]
 
-## <font size=6>进程、进程组、会话</font> {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
+## <font size=6>进程、进程组、会话</font> 
 <font size=4>进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端</font>
 ### <font size=5>会话</font>
 <font size=4>
@@ -47,6 +48,7 @@ date: 2016/07/14
 
 [slide]
 
+# {:&.flexbox.vleft}
 ## 进程
 ### 僵尸进程
 一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或者waitpid获取子进程的状态信息，那么子进程的描述符仍然保存在系统中。
@@ -55,7 +57,7 @@ date: 2016/07/14
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
 ## 什么是信号
 信号是很短的消息，可以发送给一个进程或者一组进程。
 ## 信号的目的
@@ -70,21 +72,21 @@ date: 2016/07/14
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
 ## 信号处理相关的数据结构图
 
 ![信号处理相关的数据结构图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-struct.jpg)
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
 ## 信号捕获流程图
 
 ![信号处理流程图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-proccess.jpg)
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
 ## 现象分析
 一旦ssh关闭，程序就不再运行了。
 ### 解释
@@ -94,7 +96,7 @@ If the process receiving SIGHUP is a Unix shell, then as part of job control it 
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
+# {:&.flexbox.vleft}
 ## 解决措施
 1. ctrl-c
 原因：ctrl-c 后，会触发sigint信号，而sigint只会发给前台进程组，不会影响后台进程组的正常运行。
