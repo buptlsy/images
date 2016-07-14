@@ -20,9 +20,9 @@
 <body>
 <div class="slides">
     <slides id="container">
-        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>lsy</h1>
-<h2>演讲者：刘善永</h2>
+        <slide class="slide"><section class="slide-wrapper"><article>
+<h2>隐藏在“ssh关闭后，程序不再运行”的背后知识</h2>
+<h2>刘善永</h2>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
@@ -38,9 +38,28 @@
 <h2>上线时出现的问题</h2>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h2> </h2>
-<h1>#</h1>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>进程、进程组、会话</h2>
+<p>进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端</p>
+<h3>会话</h3>
+<h4>会话首进程</h4>
+<p>创建会话的进程，该进程是会话的领导进程，其PID＝SID。</p>
+<h4>会话的构成</h4>
+<p>一个或者多个进程组的集合。包括一个前台进程组，多个后台进程组。当有控制终端输入输出时，会传递给该会话的前台进程组。</p>
+<h3>进程组</h3>
+<p>一个或多个进程的集合。（ps -ao pid,pgid,ppid,comm | cat）</p>
+<h4>进程组组长</h4>
+<p>PID和PGID相等的进程。</p>
+<h4>前台进程组</h4>
+<p>该进程组中的进程能够向终端设备进行读、写操作的进程组。</p>
+<h4>后台进程组</h4>
+<p>该进程组中的进程能够向终端进行写，但是当试图读终端设备时，将会收到SIGTTIN信号，并停止。
+后台进程组可以同时存在多个。</p>
+<h2>进程</h2>
+<h3>僵尸进程</h3>
+<p>一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或者waitpid获取子进程的状态信息，那么子进程的描述符仍然保存在系统中。</p>
+<h3>孤儿进程</h3>
+<p>一个父进程退出，而它的一个或多个子进程还在运行，那这些子进程就成为孤儿进程。孤儿进程将有init进程收养，并由init进程完成状态收集工作。</p>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
@@ -54,14 +73,43 @@
 内核强迫目标进程通过以下方式对信号作出反应：或改变目标进程的执行状态，或开始执行信号处理函数，或者两者都是。<h2>挂起信号</h2>
 已经产生还没有传递的信号被称为挂起信号。</li>
 </ol>
-<img src="https://raw.githubusercontent.com/buptlsy/images/master/redis-hash.png" alt="信号处理相关的数据结构图">
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
-<img src="https://raw.githubusercontent.com/buptlsy/images/master/redis-hash.png" alt="信号处理流程图">
+<h2>信号处理相关的数据结构图</h2>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-struct.jpg" alt="信号处理相关的数据结构图">
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>信号捕获流程图</h2>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-proccess.jpg" alt="信号处理流程图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>现象分析</h2>
+<p>一旦ssh关闭，程序就不再运行了。</p>
+<h3>解释</h3>
+<p>当网络断开或者终端窗口关闭后，也即ssh断开后，会话的进程组会收到 sighup信号，导致会话期的所有进程退出。</p>
+<h3>元凶 sighup信号</h3>
+<p>If the process receiving SIGHUP is a Unix shell, then as part of job control it will often intercept the signal and ensure that all stopped processes are continued before sending the signal to child processes (more precisely, process groups, represented internally be the shell as a &quot;job&quot;), which by default terminates them.</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>解决措施</h2>
+<ol>
+<li>ctrl-c
+原因：ctrl-c 后，会触发sigint信号，而sigint只会发给前台进程组，不会影响后台进程组的正常运行。
+参考：<a href="https://www.cons.org/cracauer/sigint.html" target="_blank">https://www.cons.org/cracauer/sigint.html</a></li>
+<li>nohup
+用法：在命令的前面加上 nohup 即可。如 nohup ping www.baidu.com
+原因：nohup可以忽略sighup信号。</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>thx</h2>
+
+</article></section></slide>
         
 
         <!-- <slide class="slide logoslide dark nobackground">
