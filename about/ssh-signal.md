@@ -26,22 +26,22 @@ date: 2016/07/14
 
 [slide]
 
-# 封面样式2 {:&.flexbox.vleft}
-## <font size=8>进程、进程组、会话<font> 
+## <font size=6>进程、进程组、会话</font> {:&.flexbox.vleft}
 <font size=4>进程属于一个进程组，进程组属于一个会话，会话可以有也可以没有控制终端</font>
-### <font size=6>会话</font>
+### <font size=5>会话</font>
 <font size=4>
 1. 会话首进程
-创建会话的进程，该进程是会话的领导进程，其PID＝SID。
+创建会话的进程，该进程是会话的领导进程，其PID＝SID。</font>
+<font size=4>
 2. 会话的构成
 一个或者多个进程组的集合。包括一个前台进程组，多个后台进程组。当有控制终端输入输出时，会传递给该会话的前台进程组。</font>
-### <font size=6>进程组</font>
+### <font size=5>进程组</font>
 <font size=4>一个或多个进程的集合。（ps -ao pid,pgid,ppid,comm | cat）</font>
-#### <font size=6>进程组组长</font>
+#### <font size=5>进程组组长</font>
 <font size=4>PID和PGID相等的进程。</font>
-#### <font size=6>前台进程组</font>
+#### <font size=5>前台进程组</font>
 <font size=4>该进程组中的进程能够向终端设备进行读、写操作的进程组。</font>
-#### <font size=6>后台进程组</font>
+#### <font size=5>后台进程组</font>
 <font size=4>该进程组中的进程能够向终端进行写，但是当试图读终端设备时，将会收到SIGTTIN信号，并停止。
 后台进程组可以同时存在多个。</font>
 
