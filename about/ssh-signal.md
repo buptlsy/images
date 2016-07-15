@@ -104,12 +104,28 @@ date: 2016/07/14
 
 ![信号处理相关的数据结构图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-struct.jpg)
 
+[note]
+信号描述符signal 字段，用来跟踪共享挂起信号
+信号处理程序描述符，用来描述每个信号必须怎样被线程组处理
+共享挂起信号队列，位于信号描述符的shared_pending字段，存放整个线程组的挂起信号
+私有挂起信号队列，位于进程描述符的pending字段，存放特定进程的挂起信号
+sigaction:
+sa_handler:指定要执行操作的类型
+sa_flags:是一个标志集，指定必须怎样处理
+sa_mask:指定当前运行信号处理程序时要屏蔽的信号
+[/note]
+
 [slide]
 
 # 信号介绍 {:&.flexbox.vleft}
 ## 信号捕获流程图
 
 ![信号处理流程图](https://raw.githubusercontent.com/buptlsy/images/master/signal-handle-proccess.jpg)
+
+[note]
+当中断或者异常发生时，进程切换到内核态。内核执行do_signal函数。这个函数又依次处理信号（通过调用handle_signal()）和建立用户态堆栈(通过调用setup_frame()或setup_rt_frame())。
+当处理程序终止时，setup_frame()或者setup_rt_frame()函数放在用户态堆栈中的返回代码就执行。这个代码调用sigreturn()或rt_sigrenturn()系统调用，相应的服务例程把正常程序的用户态堆栈硬件上下文拷贝到内核堆栈，并把用户态堆栈恢复到它原来的状态(通过调用restore_sigcongtext()).当这个系统调用结束时，普通进程就因此能恢复自己的执行。
+[/note]
 
 [slide]
 
