@@ -28,6 +28,7 @@
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>目录</h1>
 <h2>上线时出现的问题</h2>
+<h2>用户态和内核态的介绍</h2>
 <h2>进程的介绍</h2>
 <h2>信号的介绍</h2>
 <h2>现象分析</h2>
@@ -36,6 +37,26 @@
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
 <h2>上线时出现的问题</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>用户态和内核态介绍</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/linux%3Aunix%E6%9E%B6%E6%9E%84.png" alt="linux架构图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>用户态和内核态介绍</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/linux-User_kernel.png" alt="linux内核态和用户态">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>用户态和内核态介绍</h1>
+<h2>用户态和内核态的转换</h2>
+<ul>
+<li>系统调用</li>
+<li>异常。比如缺页异常</li>
+<li>外围设备的中断。例如外围设备完成用户的请求操作后，会像cpu发出信号。</li>
+</ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">

@@ -15,6 +15,7 @@ date: 2016/07/14
 
 # 目录 {:&.flexbox.vleft}
 ## 上线时出现的问题
+## 用户态和内核态的介绍
 ## 进程的介绍
 ## 信号的介绍
 ## 现象分析
@@ -23,6 +24,24 @@ date: 2016/07/14
 [slide]
 
 ## 上线时出现的问题
+
+[slide]
+
+# 用户态和内核态介绍 {:&.flexbox.vleft}
+![linux架构图](https://raw.githubusercontent.com/buptlsy/images/gh-pages/linux%3Aunix%E6%9E%B6%E6%9E%84.png)
+
+[slide]
+
+# 用户态和内核态介绍 {:&.flexbox.vleft}
+![linux内核态和用户态](https://raw.githubusercontent.com/buptlsy/images/gh-pages/linux-User_kernel.png)
+
+[slide]
+
+# 用户态和内核态介绍 {:&.flexbox.vleft}
+## 用户态和内核态的转换
+- 系统调用
+- 异常。比如缺页异常
+- 外围设备的中断。例如外围设备完成用户的请求操作后，会像cpu发出信号。
 
 [slide]
 
