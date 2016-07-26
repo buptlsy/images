@@ -1,6 +1,7 @@
 title: apollo 产品介绍
 speaker: lsy
-transition: cards
+transition: move
+theme: dark
 files: /js/demo.js,/css/demo.css
 
 [slide]
