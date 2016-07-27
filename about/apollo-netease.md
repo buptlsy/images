@@ -69,7 +69,8 @@ files: /js/demo.js,/css/demo.css
 [slide]
 
 # 扩量
-![扩量产品图1](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-kuoliang-1.png)
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-kuoliang-1.png" height="300" alt="扩量" />
+
 ![扩量产品图](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-kuoliang.png)
 
 [slide]
