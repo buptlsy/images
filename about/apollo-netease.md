@@ -64,11 +64,12 @@ files: /js/demo.js,/css/demo.css
 - 并行实验：能够支持多组实验并行运行
 - 互斥实验：能够支持多组实验互斥
 
+![流量分发机制](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-flow-dispatch.png)
 
 [slide]
 
 # 扩量
-
+![扩量产品图1](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-kuoliang-1.png)
 ![扩量产品图](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-kuoliang.png)
 
 [slide]
