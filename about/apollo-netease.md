@@ -65,7 +65,7 @@ files: /js/demo.js,/css/demo.css
 [slide]
 
 # 系统架构
-![系统架构](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-server-struct.png)
+![系统架构](https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-server-struct1.png)
 
 [slide]
 

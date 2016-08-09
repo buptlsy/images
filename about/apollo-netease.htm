@@ -83,16 +83,16 @@
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>系统架构</h1>
-<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-server-struct.png" alt="系统架构">
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-server-struct1.png" alt="系统架构">
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>流量分发机制</h1>
 <ul>
-<li>幂等：保证进入某组的用户不会进入其他组</li>
-<li>均匀化：防止被灰的是相同的人群</li>
-<li>并行实验：能够支持多组实验并行运行</li>
-<li>互斥实验：能够支持多组实验互斥</li>
+<li>按用户id的尾数分组（比如奇偶）无法保证不同的实验不受干扰</li>
+<li>流量分发的关键是让不同的实验尽可能的独立，不受干扰</li>
+<li>解决方案：SHA-1 加盐</li>
+<li>在样本量足够大的情况下，可以支持成百上千个实验同时进行</li>
 </ul>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/apollo-flow-dispatch.png" alt="流量分发机制">
 
