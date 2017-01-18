@@ -1,0 +1,198 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date: 2017/1/19
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lsy - By lsy</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume的一些知识</h1>
+<h2>演讲者：刘善永</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>目录</h1>
+<h2>flume发展</h2>
+<h2>flume基本流程</h2>
+<h2>flume channel</h2>
+<h2>flume 部署</h2>
+<h2>flume设计优缺点</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume发展</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>发展阶段</h1>
+<ul>
+<li>flume og</li>
+<li>flume ng</li>
+</ul>
+<h1>产生原因</h1>
+<p>从各种数据源推送数据数据到hadoop生态系统的各种存储系统中</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume基本流程</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>大体流程</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/flume-liuchengtu.png" alt="大体流程图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>消息流转</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/flume消息流转.png" alt="消息流转图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>消息格式</h1>
+<p>包括header和body。header放键值对，body放消息体，格式主要为两种：</p>
+<h3>json格式</h3>
+<p>jackson序列化（不赋值的字段不会序列化）</p>
+<h3>avro格式</h3>
+<h4>功能</h4>
+<ul>
+<li>rpc调用</li>
+<li>序列化反序列化<br>a、定义schema b、可选择生成对应的类 c、序列化到内存或文件 d、从内存或者文件反序列化</li>
+</ul>
+<h4>优点</h4>
+<ul>
+<li>占用空间少（不存key，优化了基本数据类型的空间）</li>
+<li>序列化反序列化速度快</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume channel</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>memory channel</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/flume-channel.png" alt="memory channel事务图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>file channel</h1>
+<p><img src="https://raw.githubusercontent.com/buptlsy/images/master/file-channel1.png" alt="file channel图">
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/file-channel2.png" alt="file channel图"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume 部署</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>单层部署</h1>
+<h1>双层部署</h1>
+<ul>
+<li>减少hdfs、hbase等介质的连接数</li>
+<li>跨数据中心</li>
+</ul>
+<img src="https://raw.githubusercontent.com/buptlsy/images/master/Flumebushu.png" alt="flume 部署图">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>flume 设计的优缺点</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>优点</h1>
+<ul>
+<li>可扩展性很好，定制化开发，可以自定义source、sink</li>
+<li>可配置性非常强，每个几秒重新加载配置</li>
+</ul>
+<h1>缺点</h1>
+<ul>
+<li>重复数据</li>
+<li>监控太简陋，只能获取json串</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'move',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>
