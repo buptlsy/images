@@ -30,7 +30,7 @@ date: 2017/1/19
 - flume ng
 
 # 产生原因
-从各种数据源推送数据数据到hadoop生态系统的各种存储系统中
+从各种数据源推送数据到hadoop生态系统的各种存储系统中
 
 [slide]
 
@@ -67,7 +67,16 @@ a、定义schema b、可选择生成对应的类 c、序列化到内存或文件
 
 [slide]
 
-# flume channel
+# flume channel {:&.flexbox.vleft}
+
+## channel selector
+- 复制
+- 多路选择
+- 自定义
+
+## channel 类型
+- memory channel
+- file channel
 
 [slide]
 
@@ -81,6 +90,25 @@ a、定义schema b、可选择生成对应的类 c、序列化到内存或文件
 
 ![file channel图](https://raw.githubusercontent.com/buptlsy/images/master/file-channel1.png)
 ![file channel图](https://raw.githubusercontent.com/buptlsy/images/master/file-channel2.png)
+
+[slide]
+
+# flume source {:&.flexbox.vleft}
+
+## 事件驱动
+- HttpSource,AvroSource
+
+## 轮询拉取
+- JMSSource
+
+[slide]
+
+# flume sink {:&.flexbox.vleft}
+
+## sink processor
+- DefaultSinkProcessor
+- FailoverSinkProcessor
+- LoadBalanceSinkProcessor
 
 [slide]
 
@@ -103,8 +131,8 @@ a、定义schema b、可选择生成对应的类 c、序列化到内存或文件
 [slide]
 
 # 优点 {:&.flexbox.vleft}
-- 可扩展性很好，定制化开发，可以自定义source、sink
-- 可配置性非常强，每个几秒重新加载配置
+- 可扩展性很好，定制化开发，可以自定义source、channel、sink
+- 可配置性非常强，每隔几秒重新加载配置
 
 # 缺点
 - 重复数据

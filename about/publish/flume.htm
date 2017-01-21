@@ -45,7 +45,7 @@
 <li>flume ng</li>
 </ul>
 <h1>产生原因</h1>
-<p>从各种数据源推送数据数据到hadoop生态系统的各种存储系统中</p>
+<p>从各种数据源推送数据到hadoop生态系统的各种存储系统中</p>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -80,8 +80,19 @@
 </ul>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>flume channel</h1>
+<h2>channel selector</h2>
+<ul>
+<li>复制</li>
+<li>多路选择</li>
+<li>自定义</li>
+</ul>
+<h2>channel 类型</h2>
+<ul>
+<li>memory channel</li>
+<li>file channel</li>
+</ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
@@ -93,6 +104,28 @@
 <h1>file channel</h1>
 <p><img src="https://raw.githubusercontent.com/buptlsy/images/master/file-channel1.png" alt="file channel图">
 <img src="https://raw.githubusercontent.com/buptlsy/images/master/file-channel2.png" alt="file channel图"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>flume source</h1>
+<h2>事件驱动</h2>
+<ul>
+<li>HttpSource,AvroSource</li>
+</ul>
+<h2>轮询拉取</h2>
+<ul>
+<li>JMSSource</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>flume sink</h1>
+<h2>sink processor</h2>
+<ul>
+<li>DefaultSinkProcessor</li>
+<li>FailoverSinkProcessor</li>
+<li>LoadBalanceSinkProcessor</li>
+</ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -116,8 +149,8 @@
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>优点</h1>
 <ul>
-<li>可扩展性很好，定制化开发，可以自定义source、sink</li>
-<li>可配置性非常强，每个几秒重新加载配置</li>
+<li>可扩展性很好，定制化开发，可以自定义source、channel、sink</li>
+<li>可配置性非常强，每隔几秒重新加载配置</li>
 </ul>
 <h1>缺点</h1>
 <ul>
