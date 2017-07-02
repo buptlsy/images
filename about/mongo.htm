@@ -1,0 +1,307 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date: 2017/7/1
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lsy - By lsy</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>目录</h1>
+<h2>mongodb简介</h2>
+<h2>mongodb的基本操作</h2>
+<h2>副本集和分片</h2>
+<h2>其他的一些点</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 简介</h1>
+<p>mongodb是一个高性能，开源，无模式且易于扩展的通用型数据库。使用c++开发。目前由10gen公司维护。</p>
+<h3>特点</h3>
+<ol>
+<li>易于使用</li>
+</ol>
+<ul>
+<li>面向文档的数据库，能仅使用一条记录来表现复杂的层级关系</li>
+<li>没有固定模式，根据需要添加或删除字段变得更容易</li>
+</ul>
+<ol>
+<li>易于扩展</li>
+</ol>
+<ul>
+<li>采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 简介</h1>
+<ol>
+<li>丰富的功能</li>
+</ol>
+<ul>
+<li>索引(唯一索引，复合索引，地理空间索引以及全文索引)</li>
+<li>聚合</li>
+<li>文件存储(GridFS 存储大文件和文件元数据)</li>
+<li>特殊的集合类型(时间有限的集合、固定大小的集合)</li>
+</ul>
+<h3>卓越的性能</h3>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 基本操作</h1>
+<p>mongodb在保留json基本key/value特性的基础上，添加了其他一些数据类型。</p>
+<ul>
+<li>布尔型(true、false)</li>
+<li>数值</li>
+<li>字符串</li>
+<li>日期</li>
+<li>内嵌文档</li>
+<li>对象id</li>
+<li>二进制数据</li>
+<li>代码</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 基本操作</h1>
+<h3>插入文档</h3>
+<ul>
+<li>db.foo.insert({&quot;foo&quot;:&quot;bar&quot;})</li>
+<li>db.foo.batchInsert([{&quot;_id&quot;:0}, {&quot;_id&quot;:1}, {&quot;_id&quot;:2}])</li>
+</ul>
+<h3>删除文档</h3>
+<ul>
+<li>db.foo.remove()</li>
+<li>db.foo.remove({&quot;opt&quot;:true})</li>
+<li>db.foo.drop()
+删除数据是永久性的，不能撤销也不能恢复</li>
+</ul>
+<h2>查询</h2>
+<ul>
+<li>find</li>
+<li>$lt, $lte, $gt, $gte</li>
+<li>$in, $or, $nin</li>
+<li>$skip, $limit, $sort</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 基础知识</h1>
+<h3>更新文档</h3>
+<ul>
+<li>$set   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})</li>
+<li>$unset db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})</li>
+<li>$inc   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$inc&quot;:{&quot;age&quot;:1}})</li>
+<li>$push  db.post.update({&quot;title&quot;:&quot;lsy&quot;}, {&quot;$push&quot;:{&quot;comments&quot;:{&quot;name&quot;:&quot;test&quot;, &quot;content&quot;:&quot;welcome&quot;}}})</li>
+<li>$pop  {&quot;$pop&quot;:{&quot;key&quot;:1}} 从数组末尾删除</li>
+<li>$pull 删除所有匹配的文档</li>
+<li>upsert db.analytics.update({&quot;url&quot;:&quot;/blog&quot;}, {&quot;$inc&quot;:{&quot;pageview&quot;:1}}, true) 操作原子性</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 基础知识</h1>
+<h2>写入安全机制</h2>
+<h3>应答式写入和非应答式写入</h3>
+<h3>多台服务器之间的写入安全</h3>
+<h3>写入提交</h3>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mongodb 副本集、分片</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 副本集 </h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/replica-set-primary-with-two-secondaries.png" alt="副本集 最小构成图">
+<h2>配置选项</h2>
+<h3>仲裁者(arbiter)</h3>
+<ul>
+<li>最避免出现平票。</li>
+<li>不存储数据。不知道应该将一个成员作为数据节点还是仲裁者时，应该将其作为数据节点</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 副本集 </h1>
+<h3>优先级</h3>
+<ul>
+<li>渴望成为主节点的程度。0~100。0表示永远不会成为主节点（被动成员）</li>
+<li>priority</li>
+<li>成为主节点，必须是拥有最新的数据</li>
+</ul>
+<h3>隐藏成员</h3>
+<ul>
+<li>hidden</li>
+<li>客户端不会向成员发送请求</li>
+</ul>
+<h3>延迟备份节点</h3>
+<ul>
+<li>slaveDelay</li>
+<li>priority=0,不接受读请求</li>
+<li>比主节点延迟指定的时间</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 副本集 </h1>
+<h3>同步</h3>
+<ul>
+<li>oplog是主节点local数据库中的一个固定的集合，包含了主节点的每一次写操作</li>
+</ul>
+<h3>心跳</h3>
+<ul>
+<li>每隔2s向其他成员发送一次心跳请求，检查每个成员的状态</li>
+<li>让主节点知道自己是否满足集合大多数的条件</li>
+</ul>
+<h3>选举</h3>
+<ul>
+<li>当一个成员节点不能到达主节点时，会申请成为主节点。达到大多数条件，就会成为主节点</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mongodb 分片</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 分片</h1>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-production-architecture.png" alt="mongo 分片">
+<h3>配置服务器</h3>
+<ul>
+<li>保存着集群和分片的元数据，即各分片包含哪些数据的信息。</li>
+<li>不需要太多的空间和资源。1kb的空间约等于200mb的真实数据</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 分片</h1>
+<h2>chunk 块</h2>
+<p>每个chunk由给定片键特定范围内的文档组成。一个块只存在于一个分片上。</p>
+<h3>拆分chunk</h3>
+<ul>
+<li>mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。</li>
+<li>mongos进程重新启动，计数会重新开始</li>
+</ul>
+<h2>balancer 均衡器</h2>
+<ul>
+<li>负责数据迁移，周期性检查分片间是否存在不平衡</li>
+<li>mongos 变身为均衡器</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 分片</h1>
+<h3>数据分发</h3>
+<h4>升序片键</h4>
+<ul>
+<li>所有的写请求都会路由到一个分片中</li>
+<li>数据均衡处理变得困难</li>
+</ul>
+<h4>随机分发的片键</h4>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mongdb副本集 + 分片</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mongodb的其他特性</h1>
+<h3>固定集合</h3>
+<h3>id生成</h3>
+<h3>存储引擎</h3>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h3>推荐一些网址和入门书籍</h3>
+<ul>
+<li>官网</li>
+<li>nofan</li>
+<li>mongodb权威指南</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'move',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>
