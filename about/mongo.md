@@ -10,7 +10,7 @@ date: 2017/7/1
 # 目录 {:&.flexbox.vleft}
 
 ## mongodb简介
-## mongodb的基础知识
+## mongodb的基本操作
 ## 副本集和分片
 ## 其他的一些点
 
@@ -20,16 +20,20 @@ date: 2017/7/1
 
 mongodb是一个高性能，开源，无模式且易于扩展的通用型数据库。使用c++开发。目前由10gen公司维护。
 
-## 特点
+### 特点
 
-### 易于使用
+1. 易于使用
 - 面向文档的数据库，能仅使用一条记录来表现复杂的层级关系
 - 没有固定模式，根据需要添加或删除字段变得更容易
 
-### 易于扩展
+2. 易于扩展
 - 采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上
 
-### 丰富的功能
+[slide]
+
+# mongodb 简介 {:&.flexbox.vleft}
+
+3. 丰富的功能
 - 索引(唯一索引，复合索引，地理空间索引以及全文索引)
 - 聚合
 - 文件存储(GridFS 存储大文件和文件元数据)
@@ -40,9 +44,7 @@ mongodb是一个高性能，开源，无模式且易于扩展的通用型数据�
 
 [slide]
 
-# mongodb 基础知识 {:&.flexbox.vleft}
-
-## 数据类型
+# mongodb 基本操作 {:&.flexbox.vleft}
 
 mongodb在保留json基本key/value特性的基础上，添加了其他一些数据类型。
 - 布尔型(true、false)
@@ -56,9 +58,7 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide] 
 
-# mongodb 基础知识 {:&.flexbox.vleft}
-
-## 基本操作
+# mongodb 基本操作 {:&.flexbox.vleft}
 
 ### 插入文档
 - db.foo.insert({"foo":"bar"})
@@ -101,22 +101,22 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide]
 
-mongodb 副本集、分片
+# mongodb 副本集、分片
 
 [slide]
 
 # mongodb 副本集  {:&.flexbox.vleft}
 
-![副本集 最小构成图](https://raw.githubusercontent.com/buptlsy/images/master/replica-set-primary-with-two-secondaries.png)
-
-[slide]
-
-# mongodb 副本集  {:&.flexbox.vleft}
+![副本集 最小构成图](https://raw.githubusercontent.com/buptlsy/images/gh-pages/replica-set-primary-with-two-secondaries.png)
 
 ## 配置选项
 ### 仲裁者(arbiter)
 - 最避免出现平票。
 - 不存储数据。不知道应该将一个成员作为数据节点还是仲裁者时，应该将其作为数据节点
+
+[slide]
+
+# mongodb 副本集  {:&.flexbox.vleft}
 
 ### 优先级
 - 渴望成为主节点的程度。0~100。0表示永远不会成为主节点（被动成员）
@@ -148,18 +148,17 @@ mongodb 副本集、分片
 
 [slide]
 
+# mongodb 分片
+
+[slide]
+
 # mongodb 分片 {:&.flexbox.vleft}
 
-![mongo 分片](https://raw.githubusercontent.com/buptlsy/images/master/sharded-cluster-production-architecture.png)
+![mongo 分片](https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-production-architecture.png)
 
-## 组成
-### 配置服务器
+### 配置服务器 
 - 保存着集群和分片的元数据，即各分片包含哪些数据的信息。
 - 不需要太多的空间和资源。1kb的空间约等于200mb的真实数据
-
-### mongos
-- 路由进程
-- 启动时从配置服务器加载集群数据
 
 [slide]
 
@@ -170,6 +169,7 @@ mongodb 副本集、分片
 ### 拆分chunk
 - mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。
 - mongos进程重新启动，计数会重新开始
+
 ## balancer 均衡器
 - 负责数据迁移，周期性检查分片间是否存在不平衡
 - mongos 变身为均衡器
@@ -177,8 +177,6 @@ mongodb 副本集、分片
 [slide]
 
 # mongodb 分片 {:&.flexbox.vleft}
-
-## 片键
 
 ### 数据分发
 #### 升序片键
@@ -192,10 +190,17 @@ mongodb 副本集、分片
 
 [slide]
 
+# mongodb的其他特性
+### 固定集合
+
+### id生成
+
+### 存储引擎
+
 
 [slide]
 
-# 推荐一些网址和入门书籍
+### 推荐一些网址和入门书籍
 - 官网
 - nofan
 - mongodb权威指南
