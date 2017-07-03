@@ -115,6 +115,32 @@
 <h3>写入提交</h3>
 
 </article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 基础知识</h1>
+<h2>索引</h2>
+<h3>唯一索引(unique)</h3>
+<ul>
+<li>_id</li>
+<li>会把null看做值，无法把多个缺少唯一索引的键的文档插入集合</li>
+<li>索引字段大小限制为1kb</li>
+</ul>
+<h3>稀疏索引(sparse)</h3>
+<ul>
+<li>不需要将每个文档都作为索引条目</li>
+</ul>
+<h3>复合索引</h3>
+<p>{ userid: 1, score: -1 }</p>
+<h3>TTL索引</h3>
+<ul>
+<li>允许为每个文档设置一个超时时间。达到预设值就会被删除。  expireAfterSecs</li>
+<li>mongodb每分钟对ttl索引进行一次清理</li>
+</ul>
+<h3>地理空间索引</h3>
+<ul>
+<li>2dsphere索引（GeoJson）</li>
+</ul>
+
+</article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>mongodb 副本集、分片</h1>
 
@@ -228,11 +254,31 @@
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/mongo-bushutu.png" alt="mongo 集群部署">
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb的其他特性</h1>
 <h3>固定集合</h3>
+<ul>
+<li>事先创建的大小固定的集合</li>
+<li>类似于循环队列，当满时会将老数据删除</li>
+<li>db.createCollection(&quot;my_collection&quot;:{&quot;capped&quot;:true, &quot;size&quot;:100000, &quot;max&quot;:100})</li>
+<li>可进行自然排序，返回的结果集文档的顺序就是文档在磁盘上的顺序</li>
+</ul>
+<h3>循环游标(tailable cursor)</h3>
+<ul>
+<li>由于普通集合不维护文档的插入顺序，只能用在固定集合上</li>
+<li>10分钟没有新的结果，会被释放</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb的其他特性</h1>
 <h3>id生成</h3>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png" alt="mongo objectId">
 <h3>存储引擎</h3>
+<ul>
+<li>mmap</li>
+<li>wiredtiger</li>
+</ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>

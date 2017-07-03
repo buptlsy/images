@@ -244,7 +244,15 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - 事先创建的大小固定的集合
 - 类似于循环队列，当满时会将老数据删除
 - db.createCollection("my_collection":{"capped":true, "size":100000, "max":100})
-- 循环游标(tailable cursor) 
+- 可进行自然排序，返回的结果集文档的顺序就是文档在磁盘上的顺序
+
+### 循环游标(tailable cursor) 
+- 由于普通集合不维护文档的插入顺序，只能用在固定集合上
+- 10分钟没有新的结果，会被释放
+
+[slide]
+
+# mongodb的其他特性 {:&.flexbox.vleft}
 
 ### id生成
 
@@ -252,7 +260,7 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 ### 存储引擎
 - mmap
-- wiredtieger
+- wiredtiger
 
 
 [slide]
