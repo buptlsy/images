@@ -102,6 +102,30 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide]
 
+# mongodb 基础知识 {:&.flexbox.vleft}
+
+## 索引
+
+### 唯一索引(unique)
+- _id
+- 会把null看做值，无法把多个缺少唯一索引的键的文档插入集合
+- 索引字段大小限制为1kb
+
+### 稀疏索引(sparse)
+- 不需要将每个文档都作为索引条目
+
+### 复合索引
+{ userid: 1, score: -1 }
+
+### TTL索引
+- 允许为每个文档设置一个超时时间。达到预设值就会被删除。  expireAfterSecs
+- mongodb每分钟对ttl索引进行一次清理
+
+### 地理空间索引
+- 2dsphere索引（GeoJson）
+
+[slide]
+
 # mongodb 副本集、分片
 
 [slide]
@@ -214,12 +238,21 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide]
 
-# mongodb的其他特性
+# mongodb的其他特性 {:&.flexbox.vleft}
+
 ### 固定集合
+- 事先创建的大小固定的集合
+- 类似于循环队列，当满时会将老数据删除
+- db.createCollection("my_collection":{"capped":true, "size":100000, "max":100})
+- 循环游标(tailable cursor) 
 
 ### id生成
 
+![mongo objectId](https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png)
+
 ### 存储引擎
+- mmap
+- wiredtieger
 
 
 [slide]
