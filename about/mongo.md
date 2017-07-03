@@ -22,18 +22,18 @@ mongodb是一个高性能，开源，无模式且易于扩展的通用型数据�
 
 ### 特点
 
-1. 易于使用
+#### 易于使用
 - 面向文档的数据库，能仅使用一条记录来表现复杂的层级关系
 - 没有固定模式，根据需要添加或删除字段变得更容易
 
-2. 易于扩展
+#### 易于扩展
 - 采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上
 
 [slide]
 
 # mongodb 简介 {:&.flexbox.vleft}
 
-3. 丰富的功能
+#### 丰富的功能
 - 索引(唯一索引，复合索引，地理空间索引以及全文索引)
 - 聚合
 - 文件存储(GridFS 存储大文件和文件元数据)
@@ -48,13 +48,14 @@ mongodb是一个高性能，开源，无模式且易于扩展的通用型数据�
 
 mongodb在保留json基本key/value特性的基础上，添加了其他一些数据类型。
 - 布尔型(true、false)
-- 数值
-- 字符串
-- 日期
-- 内嵌文档
-- 对象id
+- 数值 {"x":3}  {"x":3.14}
+- 字符串 {"x":"foobar"}
+- 日期 {"x": new Date()}
+- 数组 {"x":[a, b, c]}
+- 内嵌文档 {"x":{"foo":"bar"}}
+- 对象id {"x":ObjectId()}
 - 二进制数据
-- 代码
+
 
 [slide] 
 
@@ -179,14 +180,37 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 # mongodb 分片 {:&.flexbox.vleft}
 
 ### 数据分发
+
 #### 升序片键
+![mongo 升序片键](https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-range-based.png)
+
 - 所有的写请求都会路由到一个分片中
 - 数据均衡处理变得困难
 
+[slide]
+
+# mongodb 分片 {:&.flexbox.vleft}
+
+### 数据分发
+
 #### 随机分发的片键
+![mongo 随机分发片键](https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-hash-based.png)
+
 
 [slide]
+
+# mongodb 分片 {:&.flexbox.vleft}
+
+### 数据分发
+
+#### 地理位置相关的片键
+![mongo 地理位置相关片键](https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-zones.png)
+
+[slide]
+
 # mongdb副本集 + 分片
+
+![mongo 集群部署](https://raw.githubusercontent.com/buptlsy/images/gh-pages/mongo-bushutu.png)
 
 [slide]
 

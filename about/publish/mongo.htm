@@ -32,16 +32,12 @@
 <h1>mongodb 简介</h1>
 <p>mongodb是一个高性能，开源，无模式且易于扩展的通用型数据库。使用c++开发。目前由10gen公司维护。</p>
 <h3>特点</h3>
-<ol>
-<li>易于使用</li>
-</ol>
+<h4>易于使用</h4>
 <ul>
 <li>面向文档的数据库，能仅使用一条记录来表现复杂的层级关系</li>
 <li>没有固定模式，根据需要添加或删除字段变得更容易</li>
 </ul>
-<ol>
-<li>易于扩展</li>
-</ol>
+<h4>易于扩展</h4>
 <ul>
 <li>采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上</li>
 </ul>
@@ -49,9 +45,7 @@
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 简介</h1>
-<ol>
-<li>丰富的功能</li>
-</ol>
+<h4>丰富的功能</h4>
 <ul>
 <li>索引(唯一索引，复合索引，地理空间索引以及全文索引)</li>
 <li>聚合</li>
@@ -66,13 +60,13 @@
 <p>mongodb在保留json基本key/value特性的基础上，添加了其他一些数据类型。</p>
 <ul>
 <li>布尔型(true、false)</li>
-<li>数值</li>
-<li>字符串</li>
-<li>日期</li>
-<li>内嵌文档</li>
-<li>对象id</li>
+<li>数值 {&quot;x&quot;:3}  {&quot;x&quot;:3.14}</li>
+<li>字符串 {&quot;x&quot;:&quot;foobar&quot;}</li>
+<li>日期 {&quot;x&quot;: new Date()}</li>
+<li>数组 {&quot;x&quot;:[a, b, c]}</li>
+<li>内嵌文档 {&quot;x&quot;:{&quot;foo&quot;:&quot;bar&quot;}}</li>
+<li>对象id {&quot;x&quot;:ObjectId()}</li>
 <li>二进制数据</li>
-<li>代码</li>
 </ul>
 
 </article></section></slide>
@@ -208,11 +202,25 @@
 <h1>mongodb 分片</h1>
 <h3>数据分发</h3>
 <h4>升序片键</h4>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-range-based.png" alt="mongo 升序片键">
 <ul>
 <li>所有的写请求都会路由到一个分片中</li>
 <li>数据均衡处理变得困难</li>
 </ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 分片</h1>
+<h3>数据分发</h3>
 <h4>随机分发的片键</h4>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-hash-based.png" alt="mongo 随机分发片键">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 分片</h1>
+<h3>数据分发</h3>
+<h4>地理位置相关的片键</h4>
+<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-zones.png" alt="mongo 地理位置相关片键">
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
