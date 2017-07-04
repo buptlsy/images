@@ -20,7 +20,11 @@
 <body>
 <div class="slides">
     <slides id="container">
-        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mongodb 的那些事儿</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>目录</h1>
 <h2>mongodb简介</h2>
 <h2>mongodb的基本操作</h2>
@@ -33,113 +37,119 @@
 <p>mongodb是一个高性能，开源，无模式且易于扩展的通用型数据库。使用c++开发。目前由10gen公司维护。</p>
 <h3>特点</h3>
 <h4>易于使用</h4>
-<ul>
-<li>面向文档的数据库，能仅使用一条记录来表现复杂的层级关系</li>
-<li>没有固定模式，根据需要添加或删除字段变得更容易</li>
-</ul>
-<h4>易于扩展</h4>
-<ul>
-<li>采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上</li>
-</ul>
-
+<pre><code>- 面向文档的数据库，能仅使用一条记录来表现复杂的层级关系
+- 没有固定模式，根据需要添加或删除字段变得更容易
+</code></pre><pre><code>{
+   _id: ObjectId(&quot;5099803df3f4948bd2f98391&quot;),
+   name: { first: &quot;Alan&quot;, last: &quot;Turing&quot; },
+   birth: new Date(&#39;Jun 23, 1912&#39;),
+   death: new Date(&#39;Jun 07, 1954&#39;),
+   contribs: [ &quot;Turing machine&quot;, &quot;Turing test&quot;, &quot;Turingery&quot; ],
+   views : NumberLong(1250000)
+}
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 简介</h1>
-<h4>丰富的功能</h4>
-<ul>
-<li>索引(唯一索引，复合索引，地理空间索引以及全文索引)</li>
-<li>聚合</li>
-<li>文件存储(GridFS 存储大文件和文件元数据)</li>
-<li>特殊的集合类型(时间有限的集合、固定大小的集合)</li>
-</ul>
-<h3>卓越的性能</h3>
+<h6>丰富的功能</h6>
+<pre><code>- 索引(唯一索引，复合索引，地理空间索引以及全文索引)
+- 聚合
+- 文件存储(GridFS 存储大文件和文件元数据)
+- 特殊的集合类型(时间有限的集合、固定大小的集合)
+</code></pre><h6>易于扩展</h6>
+<pre><code>- 采用横向扩展。能自动处理集群的数据和负载，自动重新分配文档，以及将用户请求路由到正确的机器上
+</code></pre><h6>高性能</h6>
+<pre><code>- 将热数据放在内存中，加快读写速度
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb 简介</h1>
+<h6>mongodb vs mysql</h6>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">mongo</th>
+<th style="text-align:left">mysql</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">db-Collection-Document</td>
+<td style="text-align:left">　db-table-row</td>
+</tr>
+<tr>
+<td style="text-align:left">不支持事务</td>
+<td style="text-align:left">innodb引擎支持事务</td>
+</tr>
+<tr>
+<td style="text-align:left">动态模式</td>
+<td style="text-align:left">固定模式</td>
+</tr>
+<tr>
+<td style="text-align:left">副本集+分片实现高可用</td>
+<td style="text-align:left">M-S,MHA,MMM,cluster架构方式</td>
+</tr>
+</tbody>
+</table>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 基本操作</h1>
 <p>mongodb在保留json基本key/value特性的基础上，添加了其他一些数据类型。</p>
-<ul>
-<li>布尔型(true、false)</li>
-<li>数值 {&quot;x&quot;:3}  {&quot;x&quot;:3.14}</li>
-<li>字符串 {&quot;x&quot;:&quot;foobar&quot;}</li>
-<li>日期 {&quot;x&quot;: new Date()}</li>
-<li>数组 {&quot;x&quot;:[a, b, c]}</li>
-<li>内嵌文档 {&quot;x&quot;:{&quot;foo&quot;:&quot;bar&quot;}}</li>
-<li>对象id {&quot;x&quot;:ObjectId()}</li>
-<li>二进制数据</li>
-</ul>
-
+<pre><code>- 布尔型(true、false)
+- 数值 {&quot;x&quot;:3}  {&quot;x&quot;:3.14}
+- 字符串 {&quot;x&quot;:&quot;foobar&quot;}
+- 日期 {&quot;x&quot;: new Date()}
+- 数组 {&quot;x&quot;:[a, b, c]}
+- 内嵌文档 {&quot;x&quot;:{&quot;foo&quot;:&quot;bar&quot;}}
+- 对象id {&quot;x&quot;:ObjectId()}
+- 二进制数据
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 基本操作</h1>
-<h3>插入文档</h3>
-<ul>
-<li>db.foo.insert({&quot;foo&quot;:&quot;bar&quot;})</li>
-<li>db.foo.batchInsert([{&quot;_id&quot;:0}, {&quot;_id&quot;:1}, {&quot;_id&quot;:2}])</li>
-</ul>
-<h3>删除文档</h3>
-<ul>
-<li>db.foo.remove()</li>
-<li>db.foo.remove({&quot;opt&quot;:true})</li>
-<li>db.foo.drop()
-删除数据是永久性的，不能撤销也不能恢复</li>
-</ul>
-<h2>查询</h2>
-<ul>
-<li>find</li>
-<li>$lt, $lte, $gt, $gte</li>
-<li>$in, $or, $nin</li>
-<li>$skip, $limit, $sort</li>
-</ul>
-
+<h6>插入文档</h6>
+<pre><code>- db.foo.insert({&quot;foo&quot;:&quot;bar&quot;})
+- db.foo.batchInsert([{&quot;_id&quot;:0}, {&quot;_id&quot;:1}, {&quot;_id&quot;:2}])
+</code></pre><h6>删除文档</h6>
+<pre><code>- db.foo.remove()
+- db.foo.remove({&quot;opt&quot;:true})
+- db.foo.drop()
+</code></pre><p>删除数据是永久性的，不能撤销也不能恢复</p>
+<h6>查询</h6>
+<pre><code>- find
+- $lt, $lte, $gt, $gte
+- $in, $or, $nin
+- $skip, $limit, $sort
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 基础知识</h1>
-<h3>更新文档</h3>
-<ul>
-<li>$set   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})</li>
-<li>$unset db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})</li>
-<li>$inc   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$inc&quot;:{&quot;age&quot;:1}})</li>
-<li>$push  db.post.update({&quot;title&quot;:&quot;lsy&quot;}, {&quot;$push&quot;:{&quot;comments&quot;:{&quot;name&quot;:&quot;test&quot;, &quot;content&quot;:&quot;welcome&quot;}}})</li>
-<li>$pop  {&quot;$pop&quot;:{&quot;key&quot;:1}} 从数组末尾删除</li>
-<li>$pull 删除所有匹配的文档</li>
-<li>upsert db.analytics.update({&quot;url&quot;:&quot;/blog&quot;}, {&quot;$inc&quot;:{&quot;pageview&quot;:1}}, true) 操作原子性</li>
-</ul>
-
+<h6>更新文档</h6>
+<pre><code>- $set   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})
+- $unset db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$set&quot;:{&quot;book&quot;:&quot;hha&quot;}})
+- $inc   db.user.update({&quot;name&quot;:&quot;jode&quot;}, {&quot;$inc&quot;:{&quot;age&quot;:1}})
+- $push  db.post.update({&quot;title&quot;:&quot;lsy&quot;}, {&quot;$push&quot;:{&quot;comments&quot;:{&quot;name&quot;:&quot;test&quot;, &quot;content&quot;:&quot;welcome&quot;}}})
+- $pop  {&quot;$pop&quot;:{&quot;key&quot;:1}} 从数组末尾删除
+- $pull 删除所有匹配的文档
+- upsert db.analytics.update({&quot;url&quot;:&quot;/blog&quot;}, {&quot;$inc&quot;:{&quot;pageview&quot;:1}}, true) 操作原子性
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 基础知识</h1>
-<h2>写入安全机制</h2>
-<h3>应答式写入和非应答式写入</h3>
-<h3>多台服务器之间的写入安全</h3>
-<h3>写入提交</h3>
-
-</article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>mongodb 基础知识</h1>
-<h2>索引</h2>
-<h3>唯一索引(unique)</h3>
-<ul>
-<li>_id</li>
-<li>会把null看做值，无法把多个缺少唯一索引的键的文档插入集合</li>
-<li>索引字段大小限制为1kb</li>
-</ul>
-<h3>稀疏索引(sparse)</h3>
-<ul>
-<li>不需要将每个文档都作为索引条目</li>
-</ul>
-<h3>复合索引</h3>
-<p>{ userid: 1, score: -1 }</p>
-<h3>TTL索引</h3>
-<ul>
-<li>允许为每个文档设置一个超时时间。达到预设值就会被删除。  expireAfterSecs</li>
-<li>mongodb每分钟对ttl索引进行一次清理</li>
-</ul>
-<h3>地理空间索引</h3>
-<ul>
-<li>2dsphere索引（GeoJson）</li>
-</ul>
-
+<h5>索引</h5>
+<h6>唯一索引(unique)</h6>
+<pre><code>- _id
+- 会把null看做值，无法把多个缺少唯一索引的键的文档插入集合
+- 索引字段大小限制为1kb
+</code></pre><h6>稀疏索引(sparse)</h6>
+<pre><code>- 不需要将每个文档都作为索引条目
+</code></pre><h6>复合索引</h6>
+<pre><code>{ userid: 1, score: -1 }
+</code></pre><h6>TTL索引</h6>
+<pre><code>- 允许为每个文档设置一个超时时间。达到预设值就会被删除。  expireAfterSecs
+- mongodb每分钟对ttl索引进行一次清理
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>mongodb 副本集、分片</h1>
@@ -148,106 +158,79 @@
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 副本集 </h1>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/replica-set-primary-with-two-secondaries.png" alt="副本集 最小构成图">
-<h2>配置选项</h2>
-<h3>仲裁者(arbiter)</h3>
-<ul>
-<li>最避免出现平票。</li>
-<li>不存储数据。不知道应该将一个成员作为数据节点还是仲裁者时，应该将其作为数据节点</li>
-</ul>
-
+<h6>仲裁者(arbiter)</h6>
+<pre><code>- 最避免出现平票。
+- 不存储数据。不知道应该将一个成员作为数据节点还是仲裁者时，应该将其作为数据节点
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 副本集 </h1>
-<h3>优先级</h3>
-<ul>
-<li>渴望成为主节点的程度。0~100。0表示永远不会成为主节点（被动成员）</li>
-<li>priority</li>
-<li>成为主节点，必须是拥有最新的数据</li>
-</ul>
-<h3>隐藏成员</h3>
-<ul>
-<li>hidden</li>
-<li>客户端不会向成员发送请求</li>
-</ul>
-<h3>延迟备份节点</h3>
-<ul>
-<li>slaveDelay</li>
-<li>priority=0,不接受读请求</li>
-<li>比主节点延迟指定的时间</li>
-</ul>
-
+<h6>优先级</h6>
+<pre><code>- 渴望成为主节点的程度。0~100。0表示永远不会成为主节点（被动成员）
+- priority
+- 成为主节点，必须是拥有最新的数据
+</code></pre><h6>隐藏成员</h6>
+<pre><code>- hidden
+- 客户端不会向成员发送请求
+</code></pre><h6>延迟备份节点</h6>
+<pre><code>- slaveDelay
+- priority=0,不接受读请求
+- 比主节点延迟指定的时间
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 副本集 </h1>
-<h3>同步</h3>
-<ul>
-<li>oplog是主节点local数据库中的一个固定的集合，包含了主节点的每一次写操作</li>
-</ul>
-<h3>心跳</h3>
-<ul>
-<li>每隔2s向其他成员发送一次心跳请求，检查每个成员的状态</li>
-<li>让主节点知道自己是否满足集合大多数的条件</li>
-</ul>
-<h3>选举</h3>
-<ul>
-<li>当一个成员节点不能到达主节点时，会申请成为主节点。达到大多数条件，就会成为主节点</li>
-</ul>
-
+<h6>同步</h6>
+<pre><code>- oplog是主节点local数据库中的一个固定的集合，包含了主节点的每一次写操作
+</code></pre><h6>心跳</h6>
+<pre><code>- 每隔2s向其他成员发送一次心跳请求，检查每个成员的状态
+- 让主节点知道自己是否满足集合大多数的条件
+</code></pre><h6>选举</h6>
+<pre><code>- 当一个成员节点不能到达主节点时，会申请成为主节点。达到大多数条件，就会成为主节点
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>mongodb 分片</h1>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>mongodb 分片</h1>
+<slide class="slide"><section class="slide-wrapper"><article>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-production-architecture.png" alt="mongo 分片">
-<h3>配置服务器</h3>
-<ul>
-<li>保存着集群和分片的元数据，即各分片包含哪些数据的信息。</li>
-<li>不需要太多的空间和资源。1kb的空间约等于200mb的真实数据</li>
-</ul>
-
+<h6>配置服务器</h6>
+<pre><code>- 保存着集群和分片的元数据，即各分片包含哪些数据的信息。
+- 不需要太多的空间和资源。1kb的空间约等于200mb的真实数据
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 分片</h1>
-<h2>chunk 块</h2>
-<p>每个chunk由给定片键特定范围内的文档组成。一个块只存在于一个分片上。</p>
-<h3>拆分chunk</h3>
-<ul>
-<li>mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。</li>
-<li>mongos进程重新启动，计数会重新开始</li>
-</ul>
-<h2>balancer 均衡器</h2>
-<ul>
-<li>负责数据迁移，周期性检查分片间是否存在不平衡</li>
-<li>mongos 变身为均衡器</li>
-</ul>
-
+<h5>chunk 块</h5>
+<pre><code>每个chunk由给定片键特定范围内的文档组成。一个块只存在于一个分片上。
+</code></pre><h6>拆分chunk</h6>
+<pre><code>- mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。
+- mongos进程重新启动，计数会重新开始
+</code></pre><h5>balancer 均衡器</h5>
+<pre><code>- 负责数据迁移，周期性检查分片间是否存在不平衡
+- mongos 变身为均衡器
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 分片</h1>
-<h3>数据分发</h3>
-<h4>升序片键</h4>
+<h3>片键</h3>
+<p>片键决定了集群中一个集合的 documents 在不同 shards 中的分布.片键字段必须被索引,且在集合中的每条记录都不能为空</p>
+<h4>基于范围的片键</h4>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-range-based.png" alt="mongo 升序片键">
-<ul>
-<li>所有的写请求都会路由到一个分片中</li>
-<li>数据均衡处理变得困难</li>
-</ul>
-
+<pre><code>- 所有的写请求都会路由到一个分片中
+- 数据均衡处理变得困难
+- 适合做范围查询
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb 分片</h1>
-<h3>数据分发</h3>
+<h3>片键</h3>
 <h4>随机分发的片键</h4>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharding-hash-based.png" alt="mongo 随机分发片键">
-
-</article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>mongodb 分片</h1>
-<h3>数据分发</h3>
-<h4>地理位置相关的片键</h4>
-<img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/sharded-cluster-zones.png" alt="mongo 地理位置相关片键">
-
+<pre><code>- 数据平均分布，插入更有效率
+- 无法做范围查询
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>mongdb副本集 + 分片</h1>
@@ -255,40 +238,45 @@
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>mongodb的其他特性</h1>
-<h3>固定集合</h3>
-<ul>
-<li>事先创建的大小固定的集合</li>
-<li>类似于循环队列，当满时会将老数据删除</li>
-<li>db.createCollection(&quot;my_collection&quot;:{&quot;capped&quot;:true, &quot;size&quot;:100000, &quot;max&quot;:100})</li>
-<li>可进行自然排序，返回的结果集文档的顺序就是文档在磁盘上的顺序</li>
-</ul>
-<h3>循环游标(tailable cursor)</h3>
-<ul>
-<li>由于普通集合不维护文档的插入顺序，只能用在固定集合上</li>
-<li>10分钟没有新的结果，会被释放</li>
-</ul>
-
+<h1>mongodb 写入安全</h1>
+<h6>单机写入安全机制</h6>
+<pre><code>- 应答式写入
+- 非应答式写入
+</code></pre><h6>多台服务器之间的写入安全</h6>
+<pre><code>- 等待写入复制 db.runCommand({&quot;getLastError&quot;:1, &quot;w&quot;:&quot;majoity&quot;, &quot;wtimeout&quot;:1000})
+</code></pre><h3>写入提交</h3>
+<pre><code>- 日志系统(journaling).每次写入会建立一条日志(mongodb默认每隔100ms或者写入数据达到若干兆字节时，将这些操作写入日记).数据文件默认没60s刷新到磁盘，因此日志文件只需记录60s的写入数据
+- j选项确定写入操作刷盘 db.foo.insert({&quot;x&quot;:1})  db.runCommand({&quot;getLastError&quot;:1, &quot;j&quot;:true})
+  提交一次写入操作会同时提交这之前的所有写操作
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb的其他特性</h1>
-<h3>id生成</h3>
+<h6>固定集合</h6>
+<pre><code>- 事先创建的大小固定的集合
+- 类似于循环队列，当满时会将老数据删除
+- db.createCollection(&quot;my_collection&quot;:{&quot;capped&quot;:true, &quot;size&quot;:100000, &quot;max&quot;:100})
+- 可进行自然排序，返回的结果集文档的顺序就是文档在磁盘上的顺序
+</code></pre><h6>循环游标(tailable cursor)</h6>
+<pre><code>- 由于普通集合不维护文档的插入顺序，只能用在固定集合上
+- 10分钟没有新的结果，会被释放
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
+<h1>mongodb的其他特性</h1>
+<h6>id生成</h6>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png" alt="mongo objectId">
-<h3>存储引擎</h3>
-<ul>
-<li>mmap</li>
-<li>wiredtiger</li>
-</ul>
-
+<h6>存储引擎</h6>
+<pre><code>- mmap
+- wiredtiger
+</code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
-<h3>推荐一些网址和入门书籍</h3>
-<ul>
-<li>官网</li>
-<li>nofan</li>
-<li>mongodb权威指南</li>
-</ul>
-
+<h6>推荐一些网址和入门书籍</h6>
+<pre><code>- 官网  http://docs.mongoing.com/
+- nofan  http://blog.nosqlfan.com/
+- mongodb权威指南
+</code></pre>
 </article></section></slide>
         
 
