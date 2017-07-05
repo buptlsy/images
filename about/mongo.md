@@ -301,6 +301,10 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide]
 
+# mongodb的其他特性
+
+[slide]
+
 # mongodb 写入安全 {:&.flexbox.vleft}
 
 ###### 单机写入安全机制
@@ -339,18 +343,20 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - 10分钟没有新的结果，会被释放
 ```
 
+[slide]
+
 ![mongo ring buffer](https://raw.githubusercontent.com/buptlsy/images/gh-pages/ring_buffer.png)
 
 [slide]
 
-# mongodb的其他特性 {:&.flexbox.vleft}
-
-###### id生成
+# id生成 {:&.flexbox.vleft}
 
 ![mongo objectId](https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png)
 
+[slide]
 
-##### mongodb的存储引擎 
+# mongodb的存储引擎 {:&.flexbox.vleft}
+
 ###### mmap
 ```
 - memory mapped file
