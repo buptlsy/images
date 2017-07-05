@@ -53,7 +53,7 @@
 <h1>mongodb 简介</h1>
 <h6>丰富的功能</h6>
 <pre><code>- 索引(唯一索引，复合索引，地理空间索引以及全文索引)
-- 聚合
+- 聚合(MapReduce、count、group、distinct等)
 - 文件存储(GridFS 存储大文件和文件元数据)
 - 特殊的集合类型(时间有限的集合、固定大小的集合)
 </code></pre><h6>易于扩展</h6>
@@ -260,21 +260,31 @@
 </code></pre><h6>循环游标(tailable cursor)</h6>
 <pre><code>- 由于普通集合不维护文档的插入顺序，只能用在固定集合上
 - 10分钟没有新的结果，会被释放
-</code></pre>
+</code></pre><img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/ring_buffer.png" alt="mongo ring buffer">
+
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>mongodb的其他特性</h1>
 <h6>id生成</h6>
 <img src="https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png" alt="mongo objectId">
-<h6>存储引擎</h6>
-<pre><code>- mmap
-- wiredtiger
+<h5>mongodb的存储引擎</h5>
+<h6>mmap</h6>
+<pre><code>- memory mapped file
+- db lock, collection lock
+- 分配内存 power of 2 byte sizes、精确匹配、预分配
+- 引起碎片
+- 不能压缩数据
+</code></pre><h6>wiredtiger</h6>
+<pre><code>- document lock
+- 支持压缩
+- 可以手动调节存储引擎的参数(cache size, checkpoint interval, logging)
 </code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
 <h6>推荐一些网址和入门书籍</h6>
 <pre><code>- 官网  http://docs.mongoing.com/
-- nofan  http://blog.nosqlfan.com/
+- learn mongodb the hard way  http://learnmongodbthehardway.com/
+- nosqlfan  http://blog.nosqlfan.com/
 - mongodb权威指南
 </code></pre>
 </article></section></slide>

@@ -51,7 +51,7 @@ mongodb是一个高性能，开源，无模式且易于扩展的通用型数据�
 ###### 丰富的功能
 ```
 - 索引(唯一索引，复合索引，地理空间索引以及全文索引)
-- 聚合
+- 聚合(MapReduce、count、group、distinct等)
 - 文件存储(GridFS 存储大文件和文件元数据)
 - 特殊的集合类型(时间有限的集合、固定大小的集合)
 ```
@@ -339,6 +339,8 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - 10分钟没有新的结果，会被释放
 ```
 
+![mongo ring buffer](https://raw.githubusercontent.com/buptlsy/images/gh-pages/ring_buffer.png)
+
 [slide]
 
 # mongodb的其他特性 {:&.flexbox.vleft}
@@ -347,10 +349,22 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 ![mongo objectId](https://raw.githubusercontent.com/buptlsy/images/gh-pages/objectId.png)
 
-###### 存储引擎
+
+##### mongodb的存储引擎 
+###### mmap
 ```
-- mmap
-- wiredtiger
+- memory mapped file
+- db lock, collection lock
+- 分配内存 power of 2 byte sizes、精确匹配、预分配
+- 引起碎片
+- 不能压缩数据
+```
+
+###### wiredtiger
+```
+- document lock
+- 支持压缩
+- 可以手动调节存储引擎的参数(cache size, checkpoint interval, logging)
 ```
 
 
@@ -359,7 +373,8 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 ###### 推荐一些网址和入门书籍
 ```
 - 官网  http://docs.mongoing.com/
-- nofan  http://blog.nosqlfan.com/
+- learn mongodb the hard way  http://learnmongodbthehardway.com/
+- nosqlfan  http://blog.nosqlfan.com/
 - mongodb权威指南
 ```
 
