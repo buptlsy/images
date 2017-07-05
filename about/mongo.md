@@ -113,8 +113,8 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - db.foo.remove()
 - db.foo.remove({"opt":true})
 - db.foo.drop()
-```
 删除数据是永久性的，不能撤销也不能恢复
+```
 
 ###### 查询
 ```
@@ -136,7 +136,8 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - $push  db.post.update({"title":"lsy"}, {"$push":{"comments":{"name":"test", "content":"welcome"}}})
 - $pop  {"$pop":{"key":1}} 从数组末尾删除
 - $pull 删除所有匹配的文档
-- upsert db.analytics.update({"url":"/blog"}, {"$inc":{"pageview":1}}, true) 操作原子性
+- upsert 
+  db.analytics.update({"url":"/blog"}, {"$inc":{"pageview":1}}, true) 操作原子性
 ```
 
 [slide]
@@ -253,7 +254,8 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 ###### 拆分chunk
 ```
-- mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。
+- mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。
+  块拆分只改变元数据，不进行数据移动。
 - mongos进程重新启动，计数会重新开始
 ```
 
@@ -320,8 +322,10 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 ### 写入提交
 ```
-- 日志系统(journaling).每次写入会建立一条日志(mongodb默认每隔100ms或者写入数据达到若干兆字节时，将这些操作写入日记).数据文件默认没60s刷新到磁盘，因此日志文件只需记录60s的写入数据
-- j选项确定写入操作刷盘 db.foo.insert({"x":1})  db.runCommand({"getLastError":1, "j":true})
+- 日志系统(journaling).每次写入会建立一条日志(mongodb默认每隔100ms或者写入数据达到若干兆字节
+	时，将这些操作写入日记).数据文件默认没60s刷新到磁盘，因此日志文件只需记录60s的写入数据
+- j选项确定写入操作刷盘
+  db.foo.insert({"x":1})  db.runCommand({"getLastError":1, "j":true})
   提交一次写入操作会同时提交这之前的所有写操作
 ```
 

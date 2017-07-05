@@ -115,8 +115,8 @@
 <pre><code>- db.foo.remove()
 - db.foo.remove({&quot;opt&quot;:true})
 - db.foo.drop()
-</code></pre><p>删除数据是永久性的，不能撤销也不能恢复</p>
-<h6>查询</h6>
+删除数据是永久性的，不能撤销也不能恢复
+</code></pre><h6>查询</h6>
 <pre><code>- find
 - $lt, $lte, $gt, $gte
 - $in, $or, $nin
@@ -132,7 +132,8 @@
 - $push  db.post.update({&quot;title&quot;:&quot;lsy&quot;}, {&quot;$push&quot;:{&quot;comments&quot;:{&quot;name&quot;:&quot;test&quot;, &quot;content&quot;:&quot;welcome&quot;}}})
 - $pop  {&quot;$pop&quot;:{&quot;key&quot;:1}} 从数组末尾删除
 - $pull 删除所有匹配的文档
-- upsert db.analytics.update({&quot;url&quot;:&quot;/blog&quot;}, {&quot;$inc&quot;:{&quot;pageview&quot;:1}}, true) 操作原子性
+- upsert 
+  db.analytics.update({&quot;url&quot;:&quot;/blog&quot;}, {&quot;$inc&quot;:{&quot;pageview&quot;:1}}, true) 操作原子性
 </code></pre>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
@@ -205,7 +206,8 @@
 <h5>chunk 块</h5>
 <pre><code>每个chunk由给定片键特定范围内的文档组成。一个块只存在于一个分片上。
 </code></pre><h6>拆分chunk</h6>
-<pre><code>- mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。块拆分只改变元数据，不进行数据移动。
+<pre><code>- mongos记录每个chunk中插入了多少数据，如果达到拆分阙值点。mongos更新配置服务器上chunk的元信息。
+  块拆分只改变元数据，不进行数据移动。
 - mongos进程重新启动，计数会重新开始
 </code></pre><h5>balancer 均衡器</h5>
 <pre><code>- 负责数据迁移，周期性检查分片间是否存在不平衡
@@ -249,8 +251,10 @@
 </code></pre><h6>多台服务器之间的写入安全</h6>
 <pre><code>- 等待写入复制 db.runCommand({&quot;getLastError&quot;:1, &quot;w&quot;:&quot;majoity&quot;, &quot;wtimeout&quot;:1000})
 </code></pre><h3>写入提交</h3>
-<pre><code>- 日志系统(journaling).每次写入会建立一条日志(mongodb默认每隔100ms或者写入数据达到若干兆字节时，将这些操作写入日记).数据文件默认没60s刷新到磁盘，因此日志文件只需记录60s的写入数据
-- j选项确定写入操作刷盘 db.foo.insert({&quot;x&quot;:1})  db.runCommand({&quot;getLastError&quot;:1, &quot;j&quot;:true})
+<pre><code>- 日志系统(journaling).每次写入会建立一条日志(mongodb默认每隔100ms或者写入数据达到若干兆字节
+    时，将这些操作写入日记).数据文件默认没60s刷新到磁盘，因此日志文件只需记录60s的写入数据
+- j选项确定写入操作刷盘
+  db.foo.insert({&quot;x&quot;:1})  db.runCommand({&quot;getLastError&quot;:1, &quot;j&quot;:true})
   提交一次写入操作会同时提交这之前的所有写操作
 </code></pre>
 </article></section></slide>
