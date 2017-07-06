@@ -309,16 +309,18 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 # mongodb 写入安全 {:&.flexbox.vleft}
 
-###### 单机写入安全机制
+###### 写入安全
 ```
-- 应答式写入
+- 应答式写入  数据库会给出响应，告诉操作是否成功执行。db.getLastError();
 - 非应答式写入
-```
-
-###### 多台服务器之间的写入安全
-```
 - 等待写入复制 db.runCommand({"getLastError":1, "w":"majoity", "wtimeout":1000})
 ```
+
+![mongo write concern](https://raw.githubusercontent.com/buptlsy/images/gh-pages/write-concern.png)
+
+[slide]
+
+# mongodb 写入安全 {:&.flexbox.vleft}
 
 ### 写入提交
 ```
@@ -327,6 +329,25 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - j选项确定写入操作刷盘
   db.foo.insert({"x":1})  db.runCommand({"getLastError":1, "j":true})
   提交一次写入操作会同时提交这之前的所有写操作
+```
+
+[slide]
+
+# mongodb读策略  {:&.flexbox.vleft}
+
+###### readPreference
+```
+- primary 只从 primary 节点读数据，这个是默认设置
+- primaryPreferred  优先从 primary 读取，primary 不可服务，从 secondary 读
+- secondary  只从 scondary 节点读数据
+- secondaryPreferred 优先从 secondary 读取，没有 secondary 成员时，从 primary 读取
+- nearest 根据网络距离就近读取
+```
+
+###### readConcern
+```
+- local 能读取任意数据，这个是默认设置
+- majority 只能读取到 成功写入到大多数节点的数据
 ```
 
 [slide]
@@ -384,6 +405,7 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 ```
 - 官网  http://docs.mongoing.com/
 - learn mongodb the hard way  http://learnmongodbthehardway.com/
+- mongodb driver  http://mongodb.github.io/mongo-java-driver/3.4/driver/tutorials/
 - nosqlfan  http://blog.nosqlfan.com/
 - mongodb权威指南
 ```
