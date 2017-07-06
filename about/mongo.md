@@ -17,6 +17,7 @@ date: 2017/7/1
 ## mongodb简介
 ## mongodb的基本操作
 ## 副本集和分片
+## mongodb读写策略
 ## 其他的一些点
 
 [slide]
@@ -303,7 +304,7 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 [slide]
 
-# mongodb的其他特性
+# mongodb读写策略
 
 [slide]
 
@@ -316,7 +317,7 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 - 等待写入复制 db.runCommand({"getLastError":1, "w":"majoity", "wtimeout":1000})
 ```
 
-![mongo write concern](https://raw.githubusercontent.com/buptlsy/images/gh-pages/write-concern.png)
+![mongo write concern](https://raw.githubusercontent.com/buptlsy/images/gh-pages/write-concern_1.png)
 
 [slide]
 
@@ -346,8 +347,14 @@ mongodb在保留json基本key/value特性的基础上，添加了其他一些数
 
 ###### readConcern
 ```
+- 解决脏读问题
 - local 能读取任意数据，这个是默认设置
 - majority 只能读取到 成功写入到大多数节点的数据
+- 无论哪种级别的readConcern,客户端都只会从某一个确定的节点(readPreference)读取数据，
+  该节点根据自己看到的同步状态视图，只会返回已经同步到大多数节点的数据
+- 使用 readConcern 需要配置replication.enableMajorityReadConcern选项
+- 只有支持 readCommited 隔离级别的存储引擎才能支持 readConcern，比如 wiredtiger 引擎，
+  而 mmapv1引擎则不能支持。
 ```
 
 [slide]
